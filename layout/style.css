@@ -1,5 +1,6 @@
 body{
     background-image: url("assets/fundoSite.jpg");
+    
 }
 header{
     display: flex;
@@ -100,4 +101,20 @@ textarea{
 }
 .aulas div div p{
     text-align: left;
+}
+
+.divLogin{
+    background-color: #f1f1f1;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    
+}
+.divLogin h1{
+    color: black;
+    
+    
 }
