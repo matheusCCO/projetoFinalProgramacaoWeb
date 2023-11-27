@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="layout/style.css">
+    <link rel="stylesheet" type="text/css" href="layout/styleLogin.css">
     <title>Login</title>
 </head>
 <body>
-    <?php login($connect)?>
+    <main>
+    
     <div class="divLogin">
         <h1>Mais Academia</h1>
         <form method="POST">
@@ -16,6 +17,8 @@
             <input type="password" name="senha" placeholder="Senha">
             <input type="submit" name="logar">
         </form>
+        <?php login($connect)?>
     </div>
+    </main>
 </body>
 </html>

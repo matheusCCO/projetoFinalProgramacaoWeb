@@ -1,24 +1,64 @@
-<?php session_start();?>
+<?php require_once "function.php"; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="admin.css">
-    <title>Bem-vindo ao admin</title>
+	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="layout/style.css">
+	<title>Inserindo dados no Banco</title>
+	<style type="text/css">
+		input, textarea{
+			display: block;
+			margin-top: 10px;
+		}
+	</style>
 </head>
 <body>
-    <?php if(isset($_SESSION['ativa'])){ ?>
 
-    
-    <div class = "admin">
-        <h1>Bem vindo ao painel Administrativo do site</h1>
-        <p>Ola <?php echo $_SESSION["email"]; ?>, aqui voce tem acesso as ferramentas para administrar seu sistema</p>
-    </div>
-    <a href="deslogar.php" class="sair">Sair</a>
-<?php }else{
-    echo "<p>Voce não tem acesso a essa pagina</p>";
-    } ?>
+
+	<?php 
+		$resultados = getUsers($connect);
+		if (isset($_GET['id'])) {
+			echo "Ter certeza que deseja excluir o usuários de id ". $_GET['id'] . "?"; 
+			$idUser = $_GET['id'];
+			?>
+			<form method="post">
+				<input value="<?php echo $idUser; ?>" type="hidden" name="id" >
+				<button name="deletar">Excluir</button>
+			</form>
+		<?php } ?>
+		<?php
+			if (isset($_POST['deletar'])) {
+				delete($connect, $_POST['id']);
+			}
+		 ?>
+	 <table border="1">
+	 	<tr>
+	 		<th>Nome</th>
+	 		<th>E-mail</th>
+	 		<th>Telefone</th>
+            <th>Ação</th>
+	 	</tr>
+	 	<?php foreach ($resultados as $resultado) { 
+	 		$id = $resultado['id'];
+	 	?>
+	 		<tr>
+	 			<td><?php echo $resultado['nome']; ?></td>
+	 			<td><?php echo $resultado['email']; ?></td>
+                 <td><?php echo $resultado['telefone']; ?></td>
+
+	 			<td>
+	 				<a href="insert.php?id=<?php echo $id;?>">
+	 					Deletar
+	 				</a>
+	 			</td>
+	 		</tr>
+	 	<?php }	?>
+	 </table>
+
+     <div>
+        <a href="cadastrar.php">Cadastrar novo Aluno</a>
+     </div>
+
+
 </body>
 </html>
