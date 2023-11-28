@@ -1,4 +1,4 @@
-<?php require_once "function.php"; ?>
+<?php require_once "function.php"; session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +13,7 @@
 	</style>
 </head>
 <body>
-
+	<?php if(isset($_SESSION['ativa'])){ ?>
 
 	<?php 
 		$resultados = getUsers($connect);
@@ -31,34 +31,35 @@
 				delete($connect, $_POST['id']);
 			}
 		 ?>
-	 <table border="1">
-	 	<tr>
-	 		<th>Nome</th>
-	 		<th>E-mail</th>
-	 		<th>Telefone</th>
-            <th>Ação</th>
-	 	</tr>
-	 	<?php foreach ($resultados as $resultado) { 
-	 		$id = $resultado['id'];
-	 	?>
-	 		<tr>
-	 			<td><?php echo $resultado['nome']; ?></td>
-	 			<td><?php echo $resultado['email']; ?></td>
-                 <td><?php echo $resultado['telefone']; ?></td>
-
-	 			<td>
-	 				<a href="insert.php?id=<?php echo $id;?>">
-	 					Deletar
-	 				</a>
-	 			</td>
-	 		</tr>
-	 	<?php }	?>
-	 </table>
-
-     <div>
-        <a href="cadastrar.php">Cadastrar novo Aluno</a>
+	<div class="divTabela">	 
+		<table class="tabela">
+			<tr>
+				<th>Nome</th>
+				<th>E-mail</th>
+				<th>Telefone</th>
+				<th>Ação</th>
+			</tr>
+			<?php foreach ($resultados as $resultado) { 
+				$id = $resultado['id'];
+			?>
+				<tr>
+					<td><?php echo $resultado['nome']; ?></td>
+					<td><?php echo $resultado['email']; ?></td>
+					<td><?php echo $resultado['telefone']; ?></td>
+					<td>
+						<a id="btn-editar" href="insert.php?id=<?php echo $id;?>"><img src="layout/assets/icones/editar.png" alt="Editar 3"></a>	
+						<a href="insert.php?id=<?php echo $id;?>"> <img src="layout/assets/icones/deletar.png" alt="Deletar 3"></a>
+					</td>
+					
+					
+				</tr>
+			<?php }	?>
+		</table>
+        <a id="btn-cadastro" href="cadastrar.php">Cadastrar novo Aluno</a>
      </div>
+	 <?php }else{
+    echo "<p>Voce não tem acesso a essa pagina</p>";
 
-
+	} ?>
 </body>
 </html>
