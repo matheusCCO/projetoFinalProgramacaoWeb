@@ -4,9 +4,10 @@ body{
     background-size: cover;
 
 
+
 }
 main{
-    width: 1440px;
+    width: auto;
     height: 800px;
     display: flex;
 
@@ -38,3 +39,40 @@ div input{
 div h1,p{
     text-align: center;
 }
+
+.cadastro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1440px;
+    height: 800px;
+}
+
+form{
+    background-color: rgba(0, 0, 255, 0.068);
+    border-radius: 20px;
+
+}
+
+img{
+    width: 100px;
+    height: 100px;
+    
+}
+
+@media only screen and (max-width: 600px){
+    body{
+        background-image: url("assets/fundoSite.jpg");
+        background-repeat: no-repeat;
+        
+
+    }
+    main {
+        width: 100%;
+        
+        display: flex;
+        margin:20px;
+    }
+  }
+

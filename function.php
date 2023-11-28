@@ -37,13 +37,38 @@ function login($connect){
 function getUsers($connect){
 	$query = "SELECT * FROM cliente WHERE 1 ORDER BY nome";
 	$action = mysqli_query( $connect, $query );
-	//Retorna apenas o 1º valor da tabela
-	//$results = mysqli_fetch_assoc($action);
-	//MYSQLI_BOTH - MYSQLI_NUM - MYSQLI_ASSOC
 	$results = mysqli_fetch_all($action, MYSQLI_ASSOC);
 	return $results;
 }
 
+function delete($connect, $id){
+	$query = "DELETE FROM cliente WHERE id = $id";
+	$action = mysqli_query( $connect, $query );
+	if ($action) {
+		echo "Registro deletado com sucesso";
+		header("location: admin.php");
+	}else{
+		echo "Erro ao deletar";
+	}
+}
+
+
+function insertUser($connect){
+	if (isset($_POST['cadastrar'])) {
+		$nome = mysqli_real_escape_string($connect, $_POST['nome']);
+		$email = mysqli_real_escape_string($connect, $_POST['email']);
+		$telefone = mysqli_real_escape_string($connect, $_POST['telefone']);
+		if (!empty($nome) and !empty($email)) {
+			$query = "INSERT INTO cliente (nome, email, telefone) VALUES ( '$nome', '$email', '$telefone') ";
+			$execute = mysqli_query($connect, $query);
+			if ($execute) {
+				echo "Usuário inserido com sucesso.";
+			}else{
+				echo "Erro ao inserir.";
+			}
+		}
+	}
+}
 
 
 ?>

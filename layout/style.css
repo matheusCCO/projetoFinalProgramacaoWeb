@@ -2,6 +2,7 @@ body{
     background-image: url("assets/fundoSite.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    width: auto;
     
 }
 header{
@@ -167,3 +168,32 @@ textarea{
     margin: 4px;
     font-size: 12px;
 }
+
+
+
+.excluir{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 100px;
+    background-color: aquamarine;
+    border-radius: 20px;
+}
+
+@media only screen and (max-width: 600px){
+    body{
+        background-image: url("assets/fundoSite.jpg");
+        background-repeat: no-repeat;
+        
+
+    }
+    divTabela {
+        width: 100%;
+        
+        display: flex;
+        margin:20px;
+    }
+  }
+

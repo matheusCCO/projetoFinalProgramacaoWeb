@@ -10,17 +10,22 @@
     <title>Document</title>
 </head>
 <body>
-    <h2><?php //insertUser($connect); ?></h2>
-    <div>
+    <a href="admin.php"><img src="layout/assets/icones/seta-esquerda.png" alt="Deletar 3" ></a>
+    <h2><?php insertUser($connect); ?></h2>
+    <div class="cadastro">
+        
         <?php if(isset($_SESSION['ativa'])){ ?>
             <form method="post">
+            <h1>Cadastro</h1>
                 <input type="text" name="nome" placeholder="Seu nome">
 
                 <input type="email" name="email" placeholder="Seu E-mail">
+
                 <input type="phone" name="telefone" placeholder="telefone">
                 
                 <input type="submit" name="cadastrar" value="Cadastro">
             </form>
+            <a href="admin.php"></a>
     </div>
         <?php }else{
             echo "<p>Voce não tem acesso a essa pagina</p>";

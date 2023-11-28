@@ -6,10 +6,7 @@
     <link rel="stylesheet" type="text/css" href="layout/style.css">
 	<title>Inserindo dados no Banco</title>
 	<style type="text/css">
-		input, textarea{
-			display: block;
-			margin-top: 10px;
-		}
+		
 	</style>
 </head>
 <body>
@@ -18,17 +15,23 @@
 	<?php 
 		$resultados = getUsers($connect);
 		if (isset($_GET['id'])) {
-			echo "Ter certeza que deseja excluir o usuários de id ". $_GET['id'] . "?"; 
+			echo "<div class='excluir'>Ter certeza que deseja excluir o usuários de id ". $_GET['id'] . "?"; 
 			$idUser = $_GET['id'];
 			?>
 			<form method="post">
 				<input value="<?php echo $idUser; ?>" type="hidden" name="id" >
 				<button name="deletar">Excluir</button>
+				<button name="cancelar">Cancelar</button>
 			</form>
+		</div>
 		<?php } ?>
+
 		<?php
 			if (isset($_POST['deletar'])) {
 				delete($connect, $_POST['id']);
+			}
+			if(isset($_POST['cancelar'])){
+				header("location: admin.php");
 			}
 		 ?>
 	<div class="divTabela">	 
@@ -47,8 +50,8 @@
 					<td><?php echo $resultado['email']; ?></td>
 					<td><?php echo $resultado['telefone']; ?></td>
 					<td>
-						<a id="btn-editar" href="insert.php?id=<?php echo $id;?>"><img src="layout/assets/icones/editar.png" alt="Editar 3"></a>	
-						<a href="insert.php?id=<?php echo $id;?>"> <img src="layout/assets/icones/deletar.png" alt="Deletar 3"></a>
+						<a id="btn-editar" ><img src="layout/assets/icones/editar.png" alt="Editar 3"></a>	
+						<a href="admin.php?id=<?php echo $id;?>"> <img src="layout/assets/icones/deletar.png" alt="Deletar 3"></a>
 					</td>
 					
 					
