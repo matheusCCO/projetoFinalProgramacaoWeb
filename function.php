@@ -71,4 +71,23 @@ function insertUser($connect){
 }
 
 
+function updateAluno($connect){
+	if (isset($_POST['alterar'])) {
+		$id=mysqli_real_escape_string($connect, $_POST['id']);
+		$nome = mysqli_real_escape_string($connect, $_POST['nome']);
+		$email = mysqli_real_escape_string($connect, $_POST['email']);
+		$telefone = mysqli_real_escape_string($connect, $_POST['telefone']);
+		if (!empty($nome) and !empty($email) and !empty($telefone)) {
+			$query = "UPDATE cliente SET nome = '$nome', email = '$email', telefone = '$telefone' WHERE cliente.id = '$id'";
+			$execute = mysqli_query($connect, $query);
+			if ($execute) {
+				echo "Informações alterados com sucesso.";
+			}else{
+				echo "Erro ao alterar.";
+			}
+		}
+	}
+}
+
+
 ?>

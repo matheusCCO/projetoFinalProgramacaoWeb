@@ -23,6 +23,7 @@
 				<button name="deletar">Excluir</button>
 				<button name="cancelar">Cancelar</button>
 			</form>
+			
 		</div>
 		<?php } ?>
 
@@ -34,6 +35,7 @@
 				header("location: admin.php");
 			}
 		 ?>
+		 
 	<div class="divTabela">	 
 		<table class="tabela">
 			<tr>
@@ -44,13 +46,16 @@
 			</tr>
 			<?php foreach ($resultados as $resultado) { 
 				$id = $resultado['id'];
+				$nome = $resultado['nome'];
+				$email = $resultado['email'];
+				$telefone = $resultado['telefone'];
 			?>
 				<tr>
 					<td><?php echo $resultado['nome']; ?></td>
 					<td><?php echo $resultado['email']; ?></td>
 					<td><?php echo $resultado['telefone']; ?></td>
 					<td>
-						<a id="btn-editar" ><img src="layout/assets/icones/editar.png" alt="Editar 3"></a>	
+						<a id="btn-editar" href="alteraCadastro.php?id=<?php echo $id;?>&nome=<?php echo $nome?>&email=<?php echo $email?>&telefone=<?php echo $telefone?>"><img src="layout/assets/icones/editar.png" alt="Editar 3"></a>	
 						<a href="admin.php?id=<?php echo $id;?>"> <img src="layout/assets/icones/deletar.png" alt="Deletar 3"></a>
 					</td>
 					
