@@ -45,10 +45,10 @@ function delete($connect, $id){
 	$query = "DELETE FROM cliente WHERE id = $id";
 	$action = mysqli_query( $connect, $query );
 	if ($action) {
-		echo "Registro deletado com sucesso";
+		echo "<h2 class='msg'>Registro deletado com sucesso</h2>";
 		header("location: admin.php");
 	}else{
-		echo "Erro ao deletar";
+		echo "<h2 class='msg'>Erro ao deletar</h2>";
 	}
 }
 
@@ -58,18 +58,23 @@ function insertUser($connect){
 		$nome = mysqli_real_escape_string($connect, $_POST['nome']);
 		$email = mysqli_real_escape_string($connect, $_POST['email']);
 		$telefone = mysqli_real_escape_string($connect, $_POST['telefone']);
-		if (!empty($nome) and !empty($email)) {
-			$query = "INSERT INTO cliente (nome, email, telefone) VALUES ( '$nome', '$email', '$telefone') ";
+		$imagem = !empty($_FILES['imagem']['name']) ? $_FILES['imagem']['name'] : "";
+		if(!empty($imagem)){
+			$caminho = "imagens/uploads/";
+			$imagem = uploadImg($caminho);
+		}
+
+		if (!empty($nome) and !empty($email) and !empty($imagem) and !empty($telefone)) {
+			$query = "INSERT INTO cliente (nome, email, telefone, imagem) VALUES ( '$nome', '$email', '$telefone', '$imagem')";
 			$execute = mysqli_query($connect, $query);
 			if ($execute) {
-				echo "Usuário inserido com sucesso.";
+				echo "<h2 class='msg'>Usuário inserido com sucesso.</h2>";
 			}else{
-				echo "Erro ao inserir.";
+				echo "<h2 class='msg'>Erro ao inserir.</h2>";
 			}
 		}
 	}
 }
-
 
 function updateAluno($connect){
 	if (isset($_POST['alterar'])) {
@@ -81,12 +86,57 @@ function updateAluno($connect){
 			$query = "UPDATE cliente SET nome = '$nome', email = '$email', telefone = '$telefone' WHERE cliente.id = '$id'";
 			$execute = mysqli_query($connect, $query);
 			if ($execute) {
-				echo "Informações alterados com sucesso.";
+				echo "<h2 class='msg'>Informações alterados com sucesso.</h2>";
 			}else{
-				echo "Erro ao alterar.";
+				echo "<h2 class='msg'>Erro ao alterar.</h2>";
 			}
 		}
 	}
+}
+
+function uploadImg($caminho){
+	if(isset($_POST['cadastrar'])){
+		//print_r($_FILES);
+		
+		if(!empty($_FILES['imagem']['name'])){
+			
+			$nomeImagem= $_FILES['imagem']['name'];
+			$tipo = $_FILES['imagem']['type'];
+			$nomeTemporario = $_FILES['imagem']['tmp_name'];
+			$tamanho = $_FILES['imagem']['size'];
+			$erros = array();
+			$tamanhoMaximo = 1024 * 1024 * 5;
+			if ($tamanho > $tamanhoMaximo){
+				$erros[]="<h2 class='msg'>Seu arquivo exede o tamanho maxino</h2>";
+
+			}
+			$arquivosPermitido = ["png","jpg","jpeg", "PNG","JPG","JPEG"];
+			$extensao = pathinfo($nomeImagem, PATHINFO_EXTENSION);
+			if(!in_array($extensao, $arquivosPermitido)){
+				$erros[]="<h2 class='msg'>Arquivo não pernitido.</h2>";
+			}
+			$typePermitido = ["image/png","image/jpg","image/jpeg"];
+			if(!in_array($tipo, $typePermitido)){
+				$erros[]="<h2 class='msg'>Tipo Arquivo não pernitido</h2>";
+			}
+			if(!empty($erros)){
+				foreach($erros as $erro){
+					echo $erro;
+				}
+			} else{
+				//$caminho = "upload/";
+				$data = date("d-m-Y_h-i");
+				$novoNome= $data."-".$nomeImagem;
+				if(move_uploaded_file($nomeTemporario, $caminho.$novoNome)){
+					return $novoNome;
+					
+				}else{
+					return FALSE;
+				}
+			}
+		}
+	}
+
 }
 
 

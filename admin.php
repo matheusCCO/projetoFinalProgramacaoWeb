@@ -39,6 +39,7 @@
 	<div class="divTabela">	 
 		<table class="tabela">
 			<tr>
+				<th>Imagem</th>
 				<th>Nome</th>
 				<th>E-mail</th>
 				<th>Telefone</th>
@@ -49,8 +50,13 @@
 				$nome = $resultado['nome'];
 				$email = $resultado['email'];
 				$telefone = $resultado['telefone'];
+				$imagem = $resultado['imagem'];
+				if(empty($imagem)){
+					$imagem = "profile.png";
+				}
 			?>
 				<tr>
+					<td><img class="imagem" src="imagens/uploads/<?php echo $imagem;?>"></td>
 					<td><?php echo $resultado['nome']; ?></td>
 					<td><?php echo $resultado['email']; ?></td>
 					<td><?php echo $resultado['telefone']; ?></td>
@@ -69,5 +75,6 @@
     echo "<p>Voce não tem acesso a essa pagina</p>";
 
 	} ?>
+
 </body>
 </html>
