@@ -4,6 +4,7 @@ body{
     background-size: cover;
 }
 main{
+    display: flex;
     width: auto;
     height: 800px;
     display: flex;
@@ -13,7 +14,8 @@ main{
 }
 
 .divLogin{
-    background-color: #f1f1f1;    
+    
+    background-color: rgb(202, 131, 0);  
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,8 +23,9 @@ main{
     margin: 100px;
     
 }
-.divLogin h1{
-    color: black;
+.divLogin h1,p{
+    text-align: center;
+    color: white;
 }
 div input{
     display: flex;
@@ -31,26 +34,22 @@ div input{
     border-radius: 10px;
     justify-content: center;
     margin:20px;
-}
-div h1,p{
-    text-align: center;
+    border: none;
 }
 
+
 .cadastro{
+    color: white;
+    background-color: rgb(202, 131, 0); 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 1440px;
-    height: 800px;
-}
-
-form{
-    color: white;
-    background-color: rgb(202, 131, 0);
+    width: 500px;
+    height: auto;
     border-radius: 20px;
-
 }
+
 
 img{
     width: 100px;
@@ -64,7 +63,7 @@ img{
     justify-content: center;
     width: 500px;
     height: auto;
-    margin: 0;
+    margin: 20px;
     border-radius: 20px;
     
 }
@@ -73,12 +72,9 @@ img{
     body{
         background-image: url("assets/fundoSite.jpg");
         background-repeat: no-repeat;
-        
-
     }
     main {
         width: 100%;
-        
         display: flex;
         margin:20px;
     }

@@ -45,7 +45,7 @@ function delete($connect, $id){
 	$query = "DELETE FROM cliente WHERE id = $id";
 	$action = mysqli_query( $connect, $query );
 	if ($action) {
-		echo "<h2 class='msg'>Registro deletado com sucesso</h2>";
+		
 		header("location: admin.php");
 	}else{
 		echo "<h2 class='msg'>Erro ao deletar</h2>";
@@ -82,8 +82,20 @@ function updateAluno($connect){
 		$nome = mysqli_real_escape_string($connect, $_POST['nome']);
 		$email = mysqli_real_escape_string($connect, $_POST['email']);
 		$telefone = mysqli_real_escape_string($connect, $_POST['telefone']);
+		$imagem = !empty($_FILES['imagem']['name']) ? $_FILES['imagem']['name'] : "";
+		if(!empty($imagem)){
+			$caminho = "imagens/uploads/";
+			$imagem = uploadImg($caminho);
+		}
+		
+
 		if (!empty($nome) and !empty($email) and !empty($telefone)) {
-			$query = "UPDATE cliente SET nome = '$nome', email = '$email', telefone = '$telefone' WHERE cliente.id = '$id'";
+			if(!empty($imagem)){
+				$query = "UPDATE cliente SET nome = '$nome', email = '$email', telefone = '$telefone', imagem = '$imagem' WHERE cliente.id = '$id'";
+				echo $imagem;
+			} else{
+				$query = "UPDATE cliente SET nome = '$nome', email = '$email', telefone = '$telefone' WHERE cliente.id = '$id'";
+			}
 			$execute = mysqli_query($connect, $query);
 			if ($execute) {
 				echo "<h2 class='msg'>Informações alterados com sucesso.</h2>";
@@ -95,7 +107,7 @@ function updateAluno($connect){
 }
 
 function uploadImg($caminho){
-	if(isset($_POST['cadastrar'])){
+	if(isset($_POST['cadastrar']) or isset($_POST['alterar'])){
 		//print_r($_FILES);
 		
 		if(!empty($_FILES['imagem']['name'])){
@@ -128,6 +140,7 @@ function uploadImg($caminho){
 				$data = date("d-m-Y_h-i");
 				$novoNome= $data."-".$nomeImagem;
 				if(move_uploaded_file($nomeTemporario, $caminho.$novoNome)){
+					
 					return $novoNome;
 					
 				}else{

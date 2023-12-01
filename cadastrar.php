@@ -15,15 +15,15 @@
         <h2><?php insertUser($connect); ?></h2>
         
         <div class="cadastro">
-            
+            <h1>Cadastro</h1>
             <?php if(isset($_SESSION['ativa'])){ ?>
                 <form method="post" enctype="multipart/form-data">
-                <h1>Cadastro</h1>
-                    <input type="text" name="nome" placeholder="Seu nome">
+                
+                    <input type="text" name="nome" placeholder="Nome">
 
-                    <input type="email" name="email" placeholder="Seu E-mail">
+                    <input type="email" name="email" placeholder="E-mail">
 
-                    <input type="phone" name="telefone" placeholder="telefone">
+                    <input type="phone" name="telefone" placeholder="Telefone">
                     <input type="file" name="imagem">
                     
                     <input type="submit" name="cadastrar" value="Cadastro">

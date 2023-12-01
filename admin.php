@@ -10,15 +10,16 @@
 	</style>
 </head>
 <body>
+	<main>
 	<?php if(isset($_SESSION['ativa'])){ ?>
 
 	<?php 
 		$resultados = getUsers($connect);
 		if (isset($_GET['id'])) {
-			echo "<div class='excluir'>Ter certeza que deseja excluir o usuários de id ". $_GET['id'] . "?"; 
+			echo "<div class='excluir'><h3>Ter certeza que deseja excluir o usuários de id ". $_GET['id'] . "?</h3>"; 
 			$idUser = $_GET['id'];
 			?>
-			<form method="post">
+			<form  method="post">
 				<input value="<?php echo $idUser; ?>" type="hidden" name="id" >
 				<button name="deletar">Excluir</button>
 				<button name="cancelar">Cancelar</button>
@@ -61,7 +62,7 @@
 					<td><?php echo $resultado['email']; ?></td>
 					<td><?php echo $resultado['telefone']; ?></td>
 					<td>
-						<a id="btn-editar" href="alteraCadastro.php?id=<?php echo $id;?>&nome=<?php echo $nome?>&email=<?php echo $email?>&telefone=<?php echo $telefone?>"><img src="layout/assets/icones/editar.png" alt="Editar 3"></a>	
+						<a id="btn-editar" href="alteraCadastro.php?id=<?php echo $id;?>&nome=<?php echo $nome?>&email=<?php echo $email?>&telefone=<?php echo $telefone?>&imagem=<?php echo $imagem;?>"><img src="layout/assets/icones/editar.png" alt="Editar 3"></a>	
 						<a href="admin.php?id=<?php echo $id;?>"> <img src="layout/assets/icones/deletar.png" alt="Deletar 3"></a>
 					</td>
 					
@@ -75,6 +76,6 @@
     echo "<p>Voce não tem acesso a essa pagina</p>";
 
 	} ?>
-
+</main>
 </body>
 </html>
